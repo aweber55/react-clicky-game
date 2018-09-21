@@ -14,12 +14,12 @@
     height: 100%;
     overflow: hidden;
     text-align: center;
-    background:#6CADDC;
+    background:rgb(118, 147, 168);
   }
   .card > .img-container > img {
-    width: 60%
+    width: 60%;
+    padding-top: 20px;
   }
-  
   .card > .content {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -39,4 +39,6 @@
   .card > .remove:hover {
     color: #d50000;
   }
-  
+  .img {
+    padding-top: 25px;
+  }
