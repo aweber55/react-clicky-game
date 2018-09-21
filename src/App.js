@@ -5,54 +5,70 @@ import Title from "./components/Title";
 import FriendCard from "./components/FriendCard";
 import friends from "./friends.json";
 
+//thanks to stack overflow to help with the shuffle function
+function shuffleArray(array) {
+  let i = array.length - 1;
+  for (; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+};
 class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
     friends,
     pickedFriend: [],
     score: 0,
-    highscore: 0,
+    highScore: 0,
     
   };
 
 
 
-  // handleIncrement = id => {
-  //   const newScore = this.state.picked;
-  //   this.setState({
-  //     score: newScore,
-  //   });
-  //   if (newScore >= this.state.highscore) {
-  //     this.setState({ highscore: newScore});
-  //   }else if (newScore === 12) {
-  //     alert("you win");
-  //   }
-   
-  // };
-  handleIncrement = props => {
-    if (this.state.pickedFriend.includes(props.id) === false) {
-      this.state.pickedFriend.push(props.id);
-      this.setState({
-        score: this.state.score + 1,
-      });
-      if (this.state.score >= this.state.highscore) {
-        this.setState((prevState) => ({ 
-          highscore: prevState.score,
-          topMessage:"You guessed correctly!"
-         }))
-      };
+  handleClick = id => {
+    var pickedFriend = this.state.pickedFriend;
+    // check to see if it's first time or not
+    if (!pickedFriend.includes(id)) {
+      pickedFriend.push(id)
+      this.handleIncrement();
+    }else{
+      this.handleReset();
+    }};
+  
+
+  handleIncrement = () => {
+    const newScore = this.state.score + 1;
+    this.setState({
+      score: newScore,
+    });
+    if (newScore >= this.state.highScore) {
+      this.setState({ highScore: newScore });
     }
-    else {
-      this.setState({
-        score: 0,
-        pickedFriend: [],
-        topMessage: "You guessed incorrectly!"
-      });
-      if (this.state.score >= this.state.topScore) {
-        this.setState({ highscore: this.state.score })
-      };
-    };
+    else if (newScore === 12) {
+      // this.setState({ correctIncorrect: "You win!" });
+    }
+    this.handleShuffle();
   };
+
+handleReset = () => {
+  this.setState({
+    score: 0,
+    highScore: this.state.highScore,
+    pickedFriend: []
+  });
+  this.handleShuffle();
+};
+
+handleShuffle = () => {
+  let shuffledFriends = shuffleArray(friends);
+  this.setState({ friends: shuffledFriends });
+  };
+
+
+  
   removeFriend = id => {
     // Filter this.state.friends for friends with an id not equal to the id being removed
     const friends = this.state.friends.filter(friend => friend.id !== id);
@@ -67,15 +83,18 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
-        <Title score={this.state.score} highscore={this.state.highscore}>React Clicky Game</Title>
+        <Title score={this.state.score} highscore={this.state.highScore}>React Clicky Game</Title>
         {this.state.friends.map(friend => (
           <FriendCard
-          nadleIncrement={this.handleIncrement}
+          
             id={friend.id}
             key={friend.id}
             image={friend.image}
             removeFriend={this.removeFriend}
+            handleClick={this.handleClick}
             handleIncrement={this.handleIncrement}
+            handleReset={this.handleReset}
+            handleShuffle={this.handleShuffle}
             />
             ))}
       </Wrapper>
