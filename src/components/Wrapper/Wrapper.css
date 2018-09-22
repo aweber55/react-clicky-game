@@ -4,15 +4,15 @@
     height: 100%;
     display: flex;
     flex-flow: row wrap;
-    display: inline-flex;
+    
     padding: 20px;
     justify-content: space-around;
     align-content: flex-start;
     overflow: auto;
-    background: url("https://st10.cannypic.com/thumbs/36/361299_352_canny_pic.jpg") no-repeat center center fixed; 
+    /* background: url("https://st10.cannypic.com/thumbs/36/361299_352_canny_pic.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+  background-size: cover; */
   }
   
