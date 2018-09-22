@@ -23,6 +23,7 @@ class App extends Component {
     pickedFriend: [],
     score: 0,
     highScore: 0,
+    answer: ""
     
   };
 
@@ -43,12 +44,13 @@ class App extends Component {
     const newScore = this.state.score + 1;
     this.setState({
       score: newScore,
+      answer: "you bet correctly"
     });
     if (newScore >= this.state.highScore) {
       this.setState({ highScore: newScore });
     }
     else if (newScore === 12) {
-      // this.setState({ correctIncorrect: "You win!" });
+      this.setState({ correctIncorrect: "Winner Winner, Chicken Dinner!" });
     }
     this.handleShuffle();
   };
@@ -57,6 +59,7 @@ handleReset = () => {
   this.setState({
     score: 0,
     highScore: this.state.highScore,
+    answer: "You got delt a bad hand!",
     pickedFriend: []
   });
   this.handleShuffle();
@@ -83,7 +86,7 @@ handleShuffle = () => {
   render() {
     return (
       <Wrapper>
-        <Title score={this.state.score} highscore={this.state.highScore}>React Clicky Game</Title>
+        <Title score={this.state.score} highscore={this.state.highScore} answer={this.state.answer}>React Clicky Game</Title>
         {this.state.friends.map(friend => (
           <FriendCard
           
