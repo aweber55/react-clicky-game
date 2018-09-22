@@ -2,7 +2,7 @@
   "name": "react-clicky-game",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://aweber55.github.io/react-clicky-game",
+  "homepage": "https://aweber55.github.io/react-clicky-game",
   "dependencies": {
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
